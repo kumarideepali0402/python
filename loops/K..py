@@ -1,6 +1,6 @@
 for i in range(7):
     for j in range(5):
-        if (i==0 or i==6 or ((j==2) and 0<i<7)):
+        if (j==0 or i-j==2 or (1<j<5 and )):
          print("*",end='')
         else:
            print(" ",end='')
