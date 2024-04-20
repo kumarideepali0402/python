@@ -1,6 +1,6 @@
-class Student():
+class Student:
     exams_given=[] #class level datatype(declared globally)
-    def __init__(self,id,name):
+    def __init__(self,id,name): #init-constructor
         self.books=[]
         self.rollno=id
         self.name=name
