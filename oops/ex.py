@@ -1,3 +1,4 @@
+import math
 class Point:
     def __init__(self,x,y,z):
         self.x=x
@@ -18,10 +19,14 @@ class Point:
     def dot(self,p):
         return (self.x*p.x,self.y*p.y,self.z*p.z)
     def cross(self,p):
-        pass
+        return((self.y*p.z)-(self.z*p.y),((self.x*p.z)-(self.z*p.x)),(self.x*p.y)-(self.y*p.x))
 
-    def rotateangle(self):
-        pass
+    
+
+    def rotateangle(self,theta,p):
+        angle_rad= math.radians(theta)
+        return((self.x-p.x)*math.cos(theta)-(self.y-p.y)*math.sin(theta))
+        
 
     
 
@@ -33,3 +38,5 @@ print(p1.unit())
 print(p1.get_dist(p2))
 print(p1.is_equal(p2))
 print(p1.dot(p2))
+print(p1.rotateangle(45,p2))
+print(p1.cross(p2))

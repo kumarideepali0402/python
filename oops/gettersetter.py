@@ -14,12 +14,7 @@ class Point:
     def set_z(self,newz):
         self.__z=newz
 
-    # def get_x(self):
-    #     return self.__x
-    # def get_y(self):
-    #     return self.__y
-    # def get__z(self):
-    #     return self.__z
+    
     def set_x(self,newx):
         self.__x=newx
 
