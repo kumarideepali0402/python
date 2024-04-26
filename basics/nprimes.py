@@ -1,0 +1,15 @@
+num=int(input())
+n=2
+primes=0
+while(primes<num):
+    is_prime=True
+    i=2
+    while(i<n):
+        if(i%2==0):
+           is_prime=False
+           break
+        i+=1
+    if(is_prime==True):
+        print(n)
+        primes+=1 
+    n+=1

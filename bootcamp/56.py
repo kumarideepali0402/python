@@ -1,11 +1,19 @@
 n=int(input())
-k=0
-l=[]
-c==0
-while(k<n):
-  for i in range(2,n):
-    for j in range(2,n):
-      if(i%j==0):
-        c+=1
-    if(c=1)
+num=2
+primes=0
+while(primes<n):
+    is_prime=True
+    i=2
+    while(i<num):
+        if(num%i==0):
+            is_prime=False
+            break
+        i+=1
+    if(is_prime==True):
+            print(num)
+            primes+=1
+    num+=1
+
+
+    
       
