@@ -7,13 +7,10 @@ class Complex:
         return Complex(self.real+b.real,self.img+b.img)
     
     def __sub__(self,b):
-        return Complex(self.real*b.real,self.img-b.img)
-    def __str__(self):
-        return(f'{self.real},{self.img}i')
-
-a=Complex(1,2)
-b=Complex(3,4)
+        return Complex(self.real-b.real,self.img-b.img)
+    def __mul__(self,b):
+        return Complex(a*b)
+a=Complex(9,5)
+b=Complex(8,7)
 c=a+b
-print(c.real,c.img)
-c=a-b
-print(c.real,c.img)
+print(c)
