@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self,data,prev=None,next=None):
+    def __init__(self,data,prev=None,next=None,trav=None):
         self.data=data
         self.prev=prev
         self.next=next
@@ -62,7 +62,7 @@ class Dll:
           newNode=Node(data,trav,trav.next)
           trav.next=newNode
           newNode.next.prev=newNode
-        size+=1
+        self.__size+=1
     def removeFirst(self):
         if self.isEmpty():
             raise Exception("Can't delete from empty list")
@@ -78,7 +78,7 @@ class Dll:
         else:
             temp=self.__tail
             self.__tail=temp.prev
-            self.tail.next=None
+            (self.__tail).next=None
             del temp
         self.__size-=1
     def removeAt(self,index):
@@ -90,15 +90,15 @@ class Dll:
             self.removeLast()
         else:
             id=0
-            trav=self.head()
+            trav=self.__head
             while id!=index-1:
                 id+=1
                 trav=trav.next
-            temp=trav
+            temp=trav.next
             trav.next=trav.next.next
             trav.next.prev=trav
             del temp
-        size-=1
+        self.__size-=1
     def contains(self,element):
         i=0
         trav=self.__head
@@ -108,18 +108,51 @@ class Dll:
             else :
                 trav=trav.next
         return False
+    def __iter__(self):
+        self.__trav=self.__head
+        return self
+    def __next__(self):
+        x=self.__trav.data
+        if trav.next is None:
+            raise StopIteration
+        else:
+            self.__trav=self.__trav.next
+            return x
+    def findMid(self,head):
+        if head is None:
+            return None
+        slow=head
+        fast=head
+        while(fast is not None and fast.next is not None):
+            slow=slow.next
+            fast=fast.next.next
+        return slow
+
+
 
 
 
 
 
 l1=Dll()
-print(l1.size())
-print(l1.isEmpty())
 l1.append(23)
-print(l1.size())
 l1.append(45)
-l1.addFirst(56)
-print(l1.size())
-
+l1.append(87)
+print(l1)
+l1.addFirst(62)
+print(l1)
+l1.addAt(2,45)
+print(l1)
+l1.removeFirst()
+print(l1)
+l1.removeLast()
+print(l1)
+l1.removeAt(2)
+print(l1)
+print(l1.contains(45))
+l1.append(45)
+l1.append(87)
+print(l1)
+l1.append(87)
+l1.findMid(self.__head)
 
