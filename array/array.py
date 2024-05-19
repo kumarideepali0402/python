@@ -5,7 +5,7 @@ class myArray:
         self.__capacity=cap
         self.__size=0
         self.__data=[None]*cap
-        self.type=type
+        self.datatype=type
     def get_capacity(self):
         return self.__capacity
     def get_size(self):
@@ -14,15 +14,11 @@ class myArray:
         return self.__data
     def get_type(self):
         return self.datatype
-
-
-
     def __getitem__(self,index:int)->int:
         if(0<=index<self.__size):
           return self.data[index]
         else:
           raise IndexError("Index out of bounds")
-    
     def __setitem__(self,index:int,value:int)->int:
         if(0<=index<self.__size()):
             if not isinstance(value,self.__data):
@@ -49,6 +45,9 @@ class myArray:
             self.__resize()
             self.__data[self.__size]=value
             self.__size+=1
+
+l=myArray(4,int)
+
         
     
     

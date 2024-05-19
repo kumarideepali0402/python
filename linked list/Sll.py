@@ -127,27 +127,27 @@ class Sll:
             prev=curr
             curr=temp
         self.__head=prev
-    def merge(self,l1,l2):
-        if not l1:
+    def merge(self,l2):
+        if not self:
             return l2
-        else:
-            return l1
-        if l1.data<=l2.data:
-            head=tail=l1
-            l1=l1.next
+        elif not l2:
+            return self
+        if self.__head.data<=l2.__head.data:
+            head=tail=self
+            self.head=self.next
         else:
             head=tail=l2
-            l2=l2.next
-        while l1 and l2:
-            if l1.data<=l2.data:
-                tail.next=l1
-                l1=l1.next
+            l2=l2.__head.next
+        while self and l2:
+            if self.__head.data<=l2.__head.data:
+                tail.next=self
+                self=self.next
             else:
                 tail.next=l2
                 l2=l2.next
             tail=tail.next
-        if l1:
-            tail.next=l1
+        if self:
+            tail.next=self
         elif l2:
             tail.next=l2
         return head
@@ -159,41 +159,21 @@ class Sll:
             trav=trav.next
             temp=trav.next
             trav.next=None
-    def interleave(self,l1,l2):
-        temp1=l1.next
-        temp2=l2.next
-        head=l1
-        while l1 and l2:
-          l1.next=l2
-          l2.next=temp1
-          l1=temp1
-          l2=temp2
-        if l1:
+    def interleave(self,l2):
+        head=self.__head
+        head2=l2.__head
+        while head and head2:
+            head_next=head.next
+            head2_next=head2.next
+            head.next=head2
+            head2.next=head_next
+            head=head_next
+            head2=head2_next
+            if head_next==None:
+                break
+        return self
+                                               
 
-
-
-
-        
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
 l=Sll()
 print(l.size())
@@ -216,6 +196,7 @@ print(l)
 print(l.size())
 l.append(87)
 l.append(875)
+l.append(738)
 print(l)
 l.removeAt(1)
 print(l)
@@ -223,14 +204,18 @@ print(l.size())
 print(l.mid())
 print(l.search(85))
 l.reverse()
+l.append(738)
 print(l)
 l2=Sll()
 l2.append(78)
 l2.append(780)
 l2.append(784)
 l2.append(738)
+l2.append(73)
 print(l2)
-k=merge(l.head,l2.head)
+print(l.merge(l2))
+print(l.interleave(l2))
+
 
         
 
