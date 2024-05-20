@@ -132,14 +132,14 @@ class Sll:
             return l2
         elif not l2:
             return self
-        if self.__head.data<=l2.__head.data:
+        if self.data<=l2.data:
             head=tail=self
-            self.head=self.next
+            self=self.next
         else:
             head=tail=l2
-            l2=l2.__head.next
+            l2=l2.next
         while self and l2:
-            if self.__head.data<=l2.__head.data:
+            if self.data<=l2.data:
                 tail.next=self
                 self=self.next
             else:
@@ -214,7 +214,7 @@ l2.append(738)
 l2.append(73)
 print(l2)
 print(l.merge(l2))
-print(l.interleave(l2))
+# print(l.interleave(l2))
 
 
         
