@@ -151,27 +151,47 @@ class Sll:
         elif l2:
             tail.next=l2
         return head
-    def split(self,index):
-        i=0
-        trav=self.__head
-        while i==index:
-            i+=1
-            trav=trav.next
-            temp=trav.next
-            trav.next=None
-    def interleave(self,l2):
-        head=self.__head
-        head2=l2.__head
-        while head and head2:
-            head_next=head.next
-            head2_next=head2.next
-            head.next=head2
-            head2.next=head_next
-            head=head_next
-            head2=head2_next
-            if head_next==None:
-                break
-        return self
+    def rotate(self,k):
+        if not self.__head or k<0:
+            raise Exception("error")
+        current=self.__head
+        length=1
+        while current.next:
+            current=current.next
+            length+=1
+        k==k%length 
+        if k==0:
+            return 
+        current=self.__head
+        while (length-k-1):
+            current=current.next
+        newHead=current.next
+        
+
+        
+        
+
+    # def split(self,index):
+    #     i=0
+    #     trav=self.__head
+    #     while i==index:
+    #         i+=1
+    #         trav=trav.next
+    #         temp=trav.next
+    #         trav.next=None
+    # def interleave(self,l2):
+    #     head=self.__head
+    #     head2=l2.__head
+    #     while head and head2:
+    #         head_next=head.next
+    #         head2_next=head2.next
+    #         head.next=head2
+    #         head2.next=head_next
+    #         head=head_next
+    #         head2=head2_next
+    #         if head_next==None:
+    #             break
+    #     return self
                                                
 
 
@@ -213,8 +233,9 @@ l2.append(784)
 l2.append(738)
 l2.append(73)
 print(l2)
-print(l.merge(l2))
+# print(l.merge(l2))
 # print(l.interleave(l2))
+l.rotate(2)
 
 
         
