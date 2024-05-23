@@ -82,6 +82,10 @@ class Sll:
                 trav.next=None
                 del temp
             self.__size-=1
+
+    def getHead(self):
+        return self.__head
+    
     def removeAt(self,index):
         if (index<0 or index>self.size()-1):
             raise Exception("Index out of bound")
@@ -127,50 +131,77 @@ class Sll:
             prev=curr
             curr=temp
         self.__head=prev
+    # def merge(self,l2):
+    #     self=self.__head
+    #     l2=l2.getHead()
+    #     if not self:
+    #         return l2
+    #     elif not l2:
+    #         return self
+    #     if self.data<=l2.data:
+    #         head=tail=self
+    #         self=self.next
+    #     else:
+    #         head=tail=l2
+    #         l2=l2.next
+    #     while self and l2:
+    #         if self.data<=l2.data:
+    #             tail.next=self
+    #             self=self.next
+    #         else:
+    #             tail.next=l2
+    #             l2=l2.next
+    #         tail=tail.next
+    #     if self:
+    #         tail.next=self
+    #     elif l2:
+    #         tail.next=l2
+    #     return head
+
     def merge(self,l2):
-        if not self:
-            return l2
-        elif not l2:
-            return self
-        if self.data<=l2.data:
-            head=tail=self
-            self=self.next
-        else:
-            head=tail=l2
-            l2=l2.next
-        while self and l2:
-            if self.data<=l2.data:
-                tail.next=self
-                self=self.next
+        l11=self.__head
+        l22=l2.getHead()
+        tail=self.__head
+        if not l11:
+            return l22
+        elif not l22:
+            return l11
+        temp=l11.next
+        while l11 and l22:
+            if l11.data<=l22.data:
+                
+                tail.next=l22
+                tail=tail.next
+                l11=temp
+                
             else:
-                tail.next=l2
-                l2=l2.next
-            tail=tail.next
-        if self:
-            tail.next=self
-        elif l2:
-            tail.next=l2
-        return head
+                tail.next=l11
+                l22=tail.next
+                tail=tail.next
+        if l11:
+            tail.next=l11
+        elif l22:
+            tail.next=l22
+        return l11
+        
+
+
     def rotate(self,k):
-        if not self.__head or k<0:
-            raise Exception("error")
-        current=self.__head
-        length=1
-        while current.next:
-            current=current.next
-            length+=1
-        k==k%length 
+        if self.isEmpty():
+            return
+        k=k%self.__size
         if k==0:
-            return 
-        current=self.__head
-        while (length-k-1):
-            current=current.next
-        newHead=current.next
+            return
+        trav=self.__head
+        for i in range(self.__size-k-1):
+            trav=trav.next
+        tail=self.__head
+        while tail.next is not None:
+            tail=tail.next
+        tail.next=self.__head
         
 
         
-        
-
     # def split(self,index):
     #     i=0
     #     trav=self.__head
@@ -235,7 +266,7 @@ l2.append(73)
 print(l2)
 # print(l.merge(l2))
 # print(l.interleave(l2))
-l.rotate(2)
+# l.rotate(2)
 
 
         

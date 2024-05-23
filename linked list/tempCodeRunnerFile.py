@@ -1,1 +1,1 @@
-print(l.merge(l2))
+l.rotate(2)
