@@ -1,1 +1,1 @@
-l.rotate(2)
+print(l2.splitByIndex(3))

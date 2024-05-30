@@ -6,7 +6,6 @@ class Node:
 class Sll:
     def __init__(self):
         self.__head=None
-        
         self.__size=0
     def size(self):
         return self.__size
@@ -131,142 +130,219 @@ class Sll:
             prev=curr
             curr=temp
         self.__head=prev
-    # def merge(self,l2):
-    #     self=self.__head
-    #     l2=l2.getHead()
-    #     if not self:
-    #         return l2
-    #     elif not l2:
-    #         return self
-    #     if self.data<=l2.data:
-    #         head=tail=self
-    #         self=self.next
-    #     else:
-    #         head=tail=l2
-    #         l2=l2.next
-    #     while self and l2:
-    #         if self.data<=l2.data:
-    #             tail.next=self
-    #             self=self.next
-    #         else:
-    #             tail.next=l2
-    #             l2=l2.next
-    #         tail=tail.next
-    #     if self:
-    #         tail.next=self
-    #     elif l2:
-    #         tail.next=l2
-    #     return head
 
-    def merge(self,l2):
-        l11=self.__head
-        l22=l2.getHead()
-        tail=self.__head
-        if not l11:
-            return l22
-        elif not l22:
-            return l11
-        temp=l11.next
-        while l11 and l22:
-            if l11.data<=l22.data:
-                
-                tail.next=l22
-                tail=tail.next
-                l11=temp
-                
+    def traverse(self):
+        current=self.__head
+        while current:
+            print(current.data)
+            current =current.next
+    
+    def mergeTwoSorted(self, other):
+        
+        l1=self.__head
+        l2=other.__head
+
+        if  not l1:
+            return l2
+        if not l2:
+            return l1
+        if (l1.data<l2.data):
+            head=tail=l1
+            l1=l1.next
+        else:
+            head=tail=l2
+            l2=l2.next
+        while l1 and l2:
+            if(l1.data<l2.data):
+                tail.next=l1
+                l1=l1.next
             else:
-                tail.next=l11
-                l22=tail.next
-                tail=tail.next
-        if l11:
-            tail.next=l11
-        elif l22:
-            tail.next=l22
-        return l11
-        
-
-
-    def rotate(self,k):
-        if self.isEmpty():
-            return
-        k=k%self.__size
-        if k==0:
-            return
-        trav=self.__head
-        for i in range(self.__size-k-1):
-            trav=trav.next
-        tail=self.__head
-        while tail.next is not None:
+                tail.next=l2
+                l2=l2.next
             tail=tail.next
-        tail.next=self.__head
+        if l1:
+            tail.next=l1
+        if l2:
+            tail.next=l2
+        return head
         
 
+        # merged_list = Sll()
+        # trav1, trav2 = self.__head, other.__head
+        # while trav1 is not None and trav2 is not None:
+        #     if trav1.data <= trav2.data:
+        #         merged_list.append(trav1.data)
+        #         trav1 = trav1.next
+        #     else:
+        #         merged_list.append(trav2.data)
+        #         trav2 = trav2.next
+        # while trav1 is not None:
+        #     merged_list.append(trav1.data)
+        #     trav1 = trav1.next
+        # while trav2 is not None:
+        #     merged_list.append(trav2.data)
+        #     trav2 = trav2.next
+        # return merged_list
+    
+    def rotateByK(self, k):
+        if self.isEmpty() or k == 0 or k % self.__size == 0:
+            return
         
-    # def split(self,index):
-    #     i=0
-    #     trav=self.__head
-    #     while i==index:
-    #         i+=1
-    #         trav=trav.next
-    #         temp=trav.next
-    #         trav.next=None
-    # def interleave(self,l2):
-    #     head=self.__head
-    #     head2=l2.__head
-    #     while head and head2:
-    #         head_next=head.next
-    #         head2_next=head2.next
-    #         head.next=head2
-    #         head2.next=head_next
-    #         head=head_next
-    #         head2=head2_next
-    #         if head_next==None:
-    #             break
-    #     return self
+        k = k % self.__size  
+        tail = self.__head
+        new_tail = None
+        count = 1
+        
+        
+        while tail.next is not None:
+            if count == self.__size - k:
+                new_tail = tail
+            tail = tail.next
+            count += 1
+        tail.next = self.__head
+        self.__head = new_tail.next
+        new_tail.next = None
+
+    def splitByIndex(self, index):
+        if index < 0 or index > self.__size:
+            raise Exception("Index out of bound")
+        
+        if index == 0:
+            second_list = Sll()
+            second_list.__head = self.__head
+            second_list.__size = self.__size
+            self.__head = None
+            self.__size = 0
+            return self, second_list
+
+        if index == self.__size:
+            second_list = Sll()
+            return self, second_list
+
+        first_list = Sll()
+        second_list = Sll()
+
+        trav = self.__head
+        first_list.__head = trav
+        for i in range(1, index):
+            trav = trav.next
+
+        second_list.__head = trav.next
+        trav.next = None
+
+        first_list.__size = index
+        second_list.__size = self.__size - index
+
+        self.__head = None
+        self.__size = 0
+
+        return first_list, second_list
+    # def interleave(self, other):
+    #     interleaved_list = Sll()
+    #     trav1, trav2 = self.__head, other.__head
+
+    #     while trav1 is not None or trav2 is not None:
+    #         if trav1 is not None:
+    #             interleaved_list.append(trav1.data)
+    #             trav1 = trav1.next
+    #         if trav2 is not None:
+    #             interleaved_list.append(trav2.data)
+    #             trav2 = trav2.next
+
+    #     return interleaved_list
+    def interleave(self,l2):
+        l1=self.__head
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+      
+        head=tail=l1
+        temp1=l1.next
+        temp2=l2.__head
+        while temp1 and temp2:
+            tail.next=temp2
+            temp2=temp2.next
+            tail=tail.next
+        
+            temp2.next=temp1
+            temp1=temp1.next
+            tail=tail.next
+        if temp2:
+            tail.next=temp2
+        elif temp1:
+            tail.next=temp1
+        return head.next.data
+        
+        
+        
                                                
 
 
-l=Sll()
-print(l.size())
-print(l.isEmpty())
-l.append(87)
-l.append(875)
-print(l)
-print(l.size())
-l.addFirst(54)
-print(l)
-print(l.size())
-l.addAt(356,1)
-print(l)
-print(l.size())
-l.removeFirst()
-print(l)
-print(l.size())
-l.removeLast()
-print(l)
-print(l.size())
-l.append(87)
-l.append(875)
-l.append(738)
-print(l)
-l.removeAt(1)
-print(l)
-print(l.size())
-print(l.mid())
-print(l.search(85))
-l.reverse()
-l.append(738)
-print(l)
+# Usage example
+# l=Sll()
+# print(l.size())
+# print(l.isEmpty())
+# l.append(1)
+# l.append(2)
+# print(l)
+# print(l.size())
+# l.addFirst(3)
+# print(l)
+# print(l.size())
+# l.addAt(3,1)
+# print(l)
+# print(l.size())
+# l.removeFirst()
+# print(l)
+# print(l.size())
+# l.removeLast()
+# print(l)
+# print(l.size())
+# l.append(5)
+# l.append(6)
+# l.append(7)
+# print(l)
+# l.removeAt(1)
+# print(l)
+# print(l.size())
+# print(l.mid())
+# print(l.search(5))
+# l.reverse()
+# l.append(9)
+# l.append(10)
+# l.append(11)
+# l.append(12)
+# print(l)
+
 l2=Sll()
-l2.append(78)
-l2.append(780)
-l2.append(784)
-l2.append(738)
-l2.append(73)
-print(l2)
-# print(l.merge(l2))
-# print(l.interleave(l2))
-# l.rotate(2)
+l2.append(3)
+l2.append(4)
+l2.append(8)
+l2.append(9)
+l2.append(89)
+
+l3=Sll()
+l3.append(1)
+l3.append(2)
+l3.append(3)
+l3.append(4)
+l3.append(5)
+
+# print(l)
+# print(l2)
+# print(l3)
+# print('######')
+# print(l3.mergeTwoSorted(l2))
+
+# l.rotateByK(2)
+# print(l)
+# print('********')
+# print(l2)
+# print('********')
+# print(l2.splitByIndex(3))
+print(l2.interleave(l3))
+
 
 
         
