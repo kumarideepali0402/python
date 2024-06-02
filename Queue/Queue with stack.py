@@ -1,39 +1,47 @@
 class Node:
-    def __init__(self,data,next=None)
+    def __init__(self,data,next=None):
      self.data=data
      self.next=next
 class Stack:
-    def __init__(self):
+   def __init__(self):
      self.__head=None
      self.__tail=None
      self.__size=0
-    def size(self):
-       return self.__size
+   def size(self):
+      return self.__size
     
-    def isEmpty(self):
-       return self.size()==0
+   def isEmpty(self):
+      return self.size()==0
     
-    def push(self,data):
-        newNode=Node()
-        if self.isEmpty():
-          self.__head=newNode
-          self.__tail=newNode
-        else:
-          self.__tail.next=newNode
-          self.__tail=newNode
+   def push(self,data):
+      newNode=Node(data)
+      newNode.next=self.__head
+      self.__head=newNode
+      self.__size+=1
 
-    def pop(self):
-       if self.isEmpty():
+   def pop(self):
+      if self.isEmpty():
           raise Exception("Stack is empty")
-       else:
-          trav=self.__head
-          while trav.next.next:
-             trav=trav.next
-          trav.next=None
-          self.__tail=trav
+      else:
+          temp=self.__head
+          k=temp
+          self.__head=self.__head.next
+          del(temp)
+          return k.data
+   def __str__(self):
+      l=[]
+      trav=self.__head
+      while trav:
+         l.append(str(trav.data))
+         trav=trav.next
+      return '----'.join(l)
 
 l=Stack()
-l.push()
-       
+l.push(45)
+l.push(98)  
+l.push(65)    
+print(l)
+print(l.pop())
+
 
 
