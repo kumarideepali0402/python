@@ -16,9 +16,15 @@ class Queue:
         if self.isEmpty():
             self.__head=newNode
             self.__tail=newNode
+            newNode.next=self.__head
         else:
+           trav=trav.__head
+           while trav:
+               trav=trav.next
            self.__tail.next=newNode
+           newNode.next=self.__head
            self.__tail=newNode
+           
         self.__size+=1
     def front(self,data):
         newNode=Node(data)
@@ -52,20 +58,7 @@ class Queue:
             return
         else:
             return self.__head.data
-
-class Stack:
-    def __init__(self):
-        self.Q1=Queue()
-        self.Q2=Queue()
-    def push(self,data):
-        self.q2.append(data)
-        while self.q1:
-            self.q2.append()
-        
-        
-    def pop(self):
-        pass
-    def size(self):
-        pass
-    def isEmpty(self):
-        pass
+l=Queue()
+l.push(8)
+l.push(9)
+print(l)

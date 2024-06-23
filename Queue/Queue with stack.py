@@ -34,7 +34,13 @@ class Stack:
       while trav:
          l.append(str(trav.data))
          trav=trav.next
-      return '----'.join(l)
+      return '---->'.join(l)
+   def peek(self):
+      if self.isEmpty():
+         raise Exception("Empty Stack")
+      return self.__head.data
+class Queue:
+   def __init__()
 
 l=Stack()
 l.push(45)
@@ -42,6 +48,7 @@ l.push(98)
 l.push(65)    
 print(l)
 print(l.pop())
-
+print(l)
+print(l.peek())
 
 
