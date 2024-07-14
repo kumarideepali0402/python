@@ -2,14 +2,16 @@ class Entry:
     def __init__(self,key,value):
         self.key=key
         self.value=value
-        self.hash=hash
+        self.hash=hash(key)
+    def __str__(self):
+        return str(self.key) +":"+(self.value)
 
-class Hashmap:
-    def __init__(self,size,cap,max_threshold):
+class HT:
+    def __init__(self,size,cap):
         self.__size=0
-        self.__cap=cap
-        self.__data=[[] for i in range(cap)]
-        self.__max_threshold=max_threshold
+        self.__cap=5
+        self.__data=[[] for i in range(self.__cap)]
+        
 
     def size(self):
         return self.__size
@@ -28,37 +30,62 @@ class Hashmap:
 
     
     def insert(self,key,value):
-        if((self.__size/self.__cap)>=self.__max_threshold):
-            self.resize()
-        e=Entry(key,value,hash(key)%self.__size)
+        # find index to store the key (0,cap-1)
+# check if key is already present in index or not if yes update the value else append it
+        # if((self.__size/self.__cap)>=self.__max_threshold):
+        #     self.resize()
+        e=Entry(key,value)
         is_present=False
-        for i in range(self.__data[e.hash]):
-            if(self.__data[e.hash][i].key==e.key):
-                self.__data[e.hash][i]=e
+        index=e.hash%self.__cap
+        for i in range(len(self.__data[index])):
+            if(self.__data[index][i].key==key):
+                self.__data[index][i]=e
                 is_present=True
+                break
             if(not is_present):
-                self.__data[e.hash].append(e)
-            self.__size+=1
+                self.__data[index].append(e)
+                self.__size+=1
+    def print(self):
+        for i in range (self.__cap):
+            print("bucket:" +str(i)+":")
+            for e in self.data[i]:
+                print(e,sep='->')
+        print("----------------")
 
 
     def get(self,key):
-        index=hash(key)%self.__cap
-        for e in self.__data:
-            if(e.key==key): 
-                return e.value
-            return None
+        hv=hash(key)%self.__cap
+        for i in range(len(self.__data[hv])):
+            if(self.__data[hv][i].key==key): 
+                return self.__data[hv][i].value
+            else:
+                return None
         
     def remove(self,key):
-        index=hash(key)%self.__cap
-        for e in self.__data:
-            if (e.key==key):
-                self.__data[index].remove(e)
+        hv=hash(key)%self.__cap
+        l=len(self.__data[hv])
+        
+        for i in range (l):
+            if (self.__data[hv][i].key==key):
+                # temp=self.__data[hv][l-1]
+                # self.__data[hv][l-1]=self.__data[hv][i]
+                # self.__data[hv][key]=temp
+                # self.__data[hv].pop()
+                del self.__data[hv][i]
                 self.__size-=1
                 break
+
+
                 
 
 
 
-a=Hashmap(4,6,8)
+a=HT(4,6)
 a.insert(2,"deepali")
-print(a.__size)  
+a.insert(1,"Najma")
+a.insert(3,"Keerthana")
+print(a.size())  
+print(a.get(2))
+a.remove(1)
+print(a.get(2))
+print(a.size())  
