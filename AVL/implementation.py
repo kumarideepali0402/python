@@ -68,6 +68,8 @@ class AVL:
                 return self.__leftleftCase(node)
             else:
                 return self.__leftRightCase(node)
+        else: 
+            return node
             
     def __rightRightCase(self,node):
         return self.__rotateRight(self,node)
@@ -130,7 +132,10 @@ class AVL:
                     successor=successor.left
                 node.data=successor.data
                 node.right=self.__remove(node.right,successor.data)
+                self.__update(node)
+                return self.__balance(node)
                 return node
+              
         elif(node.data>value):
             node.left= self.__remove(node.left,value)
         else:
