@@ -166,24 +166,6 @@ class Sll:
             tail.next=l2
         return head
         
-
-        # merged_list = Sll()
-        # trav1, trav2 = self.__head, other.__head
-        # while trav1 is not None and trav2 is not None:
-        #     if trav1.data <= trav2.data:
-        #         merged_list.append(trav1.data)
-        #         trav1 = trav1.next
-        #     else:
-        #         merged_list.append(trav2.data)
-        #         trav2 = trav2.next
-        # while trav1 is not None:
-        #     merged_list.append(trav1.data)
-        #     trav1 = trav1.next
-        # while trav2 is not None:
-        #     merged_list.append(trav2.data)
-        #     trav2 = trav2.next
-        # return merged_list
-    
     def rotateByK(self, k):
         if self.isEmpty() or k == 0 or k % self.__size == 0:
             return
@@ -237,19 +219,7 @@ class Sll:
         self.__size = 0
 
         return first_list, second_list
-    # def interleave(self, other):
-    #     interleaved_list = Sll()
-    #     trav1, trav2 = self.__head, other.__head
-
-    #     while trav1 is not None or trav2 is not None:
-    #         if trav1 is not None:
-    #             interleaved_list.append(trav1.data)
-    #             trav1 = trav1.next
-    #         if trav2 is not None:
-    #             interleaved_list.append(trav2.data)
-    #             trav2 = trav2.next
-
-    #     return interleaved_list
+    
     def interleave(self,l2):
         l1=self.__head
         if not l1:
@@ -273,47 +243,6 @@ class Sll:
         elif temp1:
             tail.next=temp1
         return head.next.data
-        
-        
-        
-                                               
-
-
-# Usage example
-# l=Sll()
-# print(l.size())
-# print(l.isEmpty())
-# l.append(1)
-# l.append(2)
-# print(l)
-# print(l.size())
-# l.addFirst(3)
-# print(l)
-# print(l.size())
-# l.addAt(3,1)
-# print(l)
-# print(l.size())
-# l.removeFirst()
-# print(l)
-# print(l.size())
-# l.removeLast()
-# print(l)
-# print(l.size())
-# l.append(5)
-# l.append(6)
-# l.append(7)
-# print(l)
-# l.removeAt(1)
-# print(l)
-# print(l.size())
-# print(l.mid())
-# print(l.search(5))
-# l.reverse()
-# l.append(9)
-# l.append(10)
-# l.append(11)
-# l.append(12)
-# print(l)
 
 l2=Sll()
 l2.append(3)
@@ -329,18 +258,18 @@ l3.append(3)
 l3.append(4)
 l3.append(5)
 
-# print(l)
-# print(l2)
-# print(l3)
-# print('######')
-# print(l3.mergeTwoSorted(l2))
 
-# l.rotateByK(2)
-# print(l)
-# print('********')
-# print(l2)
-# print('********')
-# print(l2.splitByIndex(3))
+print(l2)
+print(l3)
+print('######')
+print(l3.mergeTwoSorted(l2))
+
+l.rotateByK(2)
+
+print('********')
+print(l2)
+print('********')
+print(l2.splitByIndex(3))
 print(l2.interleave(l3))
 
 
